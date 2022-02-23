@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Product } from './interfaces/product.interface';
+import { ProductsService } from './services/products.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'wallapop-frontend-test';
+  products: Product[] = [];
+
+  constructor() {}
 }
