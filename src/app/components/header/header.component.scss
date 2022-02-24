@@ -38,30 +38,41 @@
     }
 
     .btn {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: inherit;
-      font-weight: 600;
-      position: relative;
-      text-decoration: none;
-      padding: 0.5em 1.25em;
-      border-radius: 6em;
-      transition: all 0.2s;
-      border: none;
-      font-family: inherit;
-      font-weight: 500;
+
       color: black;
       background-color: white;
       cursor: pointer;
 
+      text-decoration: none;
+      border: none;
+      font-family: inherit;
+      font-weight: 600;
+      padding: 0.5em 1.25em;
+      border-radius: 6em;
+      transition: all 0.2s;
+
+
+
       img {
         width: 28px;
         margin-left: 8px;
+
+        @media screen and (max-width: 650px) {
+          margin-left: 0;
+        }
       }
 
-      span {
+      &__text::after {
+        content: 'Favoritos';
         font-weight: 600;
+
+        @media screen and (max-width: 650px) {
+          content: '';
+        }
       }
     }
 
