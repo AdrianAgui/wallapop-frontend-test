@@ -1,0 +1,23 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  position: sticky;
+  background-color: aquamarine;
+
+  .logo {
+    width: 42px;
+    height: 42px;
+    margin: 0.5rem 1rem 0.5rem 2rem;
+    cursor: pointer;
+  }
+
+  .searcher {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../../interfaces/product.interface';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-grid',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grid.component.scss']
 })
 export class GridComponent implements OnInit {
+  products: Product[] = [];
 
-  constructor() { }
+  constructor(private readonly productsService: ProductsService) {}
 
   ngOnInit(): void {
+    this.productsService.getProducts().subscribe((prods) => {
+      console.table(prods);
+      this.products = prods;
+    });
   }
-
 }

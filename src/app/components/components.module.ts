@@ -4,10 +4,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearcherComponent } from './searcher/searcher.component';
 import { GridComponent } from './grid/grid.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, SearcherComponent, GridComponent],
+  declarations: [HeaderComponent, FooterComponent, SearcherComponent, GridComponent, ProductComponent],
   imports: [CommonModule],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent, FooterComponent, GridComponent]
 })
 export class ComponentsModule {}

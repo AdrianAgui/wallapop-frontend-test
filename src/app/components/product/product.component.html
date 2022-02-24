@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="top">
+      <img class="image" loading="lazy" [src]="product?.image" />
+    </div>
+    <div class="bottom">
+      <div class="details">
+        <h1 class="title">{{ product?.title }}</h1>
+        <p class="email">{{ product?.email }}</p>
+        <p class="price">{{ product?.price | number:'':'es-ES' }}&nbsp;€</p>
+      </div>
+    </div>
+  </div>
+</div>
