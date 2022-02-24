@@ -34,11 +34,7 @@ export class GridComponent implements OnInit {
           return title.includes(text) || descr.includes(text) || email.includes(text) || prod.price === text;
         });
 
-        if (!this.sortType) {
-          this.products = searchResult;
-        } else {
-          this.products = this.sortsService.sortProducts(searchResult, this.sortType);
-        }
+        this.products = !this.sortType ? searchResult : this.sortsService.sortProducts(searchResult, this.sortType);
       } else {
         this.getProducts();
       }
@@ -52,7 +48,7 @@ export class GridComponent implements OnInit {
 
   private getProducts() {
     this.productsService.getProducts(this.offset, this.limit).subscribe((prods) => {
-      this.products = prods;
+      this.products = !this.sortType ? prods : this.sortsService.sortProducts(prods, this.sortType);
     });
   }
 
