@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SearcherService } from 'src/app/services/searcher/searcher.service';
 
 @Component({
   selector: 'app-searcher',
   templateUrl: './searcher.component.html',
   styleUrls: ['./searcher.component.scss']
 })
-export class SearcherComponent implements OnInit {
+export class SearcherComponent {
+  inputHasText = false;
 
-  constructor() { }
+  constructor(private readonly searcherService: SearcherService) {}
 
-  ngOnInit(): void {
+  filterChange(event: any) {
+    this.inputHasText = event.value !== '';
+    this.searcherService.onSearchChange.next(event.value);
   }
 
+  focusInput() {
+    document.getElementById('filter')?.focus();
+  }
 }

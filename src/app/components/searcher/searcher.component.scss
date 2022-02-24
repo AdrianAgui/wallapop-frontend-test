@@ -1,3 +1,62 @@
-p {
-  margin-right: 11rem;
+.searcher__box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 4px;
+  font-weight: 600;
+  border: none;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+.icon {
+  cursor: pointer;
+
+  img {
+    width: 48px;
+    height: 48px;
+  }
+
+}
+
+.input {
+  position: relative;
+
+  &__label {
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    white-space: nowrap;
+    transform: translate(0, 0);
+    transform-origin: 0 0;
+    transition: transform 80ms ease-in;
+    font-weight: bold;
+    cursor: text;
+    font-family: 'Poppins';
+  }
+
+  &__field {
+    width: 90%;
+    display: block;
+    border: 0;
+    padding: 24px 0 8px 18px;
+    background: transparent;
+    border-radius: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Poppins';
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus {
+      & + .input__label {
+        transform: translate(0.25rem, -65%) scale(0.8);
+      }
+    }
+  }
+
+  &__animation {
+    transform: translate(0.25rem, -65%) scale(0.8);
+  }
 }

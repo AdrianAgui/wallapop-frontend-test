@@ -9,17 +9,22 @@ const endpoint = 'https://frontend-tech-test-data.s3.eu-west-1.amazonaws.com/ite
   providedIn: 'root'
 })
 export class ProductsService {
-  private products: Product[] = [];
+  private allProducts: Product[] = [];
 
   constructor(private readonly http: HttpClient) {}
 
-  getProducts(offset = 0, limit = 6): Observable<Product[]> {
-    return this.products.length > 0
-      ? of(this.products.slice(offset, limit))
-      : this.http.get<ProductsResponse>(endpoint).pipe(map((res: ProductsResponse) => res.items));
+  getProducts(offset?: number, limit?: number): Observable<Product[]> {
+    return this.allProducts.length > 0
+      ? of(this.allProducts.slice(offset, limit))
+      : this.http.get<ProductsResponse>(endpoint).pipe(
+          map((res: ProductsResponse) => {
+            this.allProducts = res.items;
+            return res.items;
+          })
+        );
   }
 
-  setProducts(prods: Product[]) {
-    this.products = prods;
+  getAllProducts() {
+    return this.allProducts;
   }
 }

@@ -19,7 +19,6 @@ export class InitGuard implements CanActivate {
     return this.productsService.getProducts().pipe(
       map((prods: Product[]) => {
         if (prods && prods.length > 0) {
-          this.productsService.setProducts(prods);
           return true;
         }
         return false;

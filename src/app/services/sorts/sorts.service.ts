@@ -6,32 +6,27 @@ import { Product } from '../../interfaces/product.interface';
 })
 export class SortsService {
   sortProducts(products: Product[], sortType: string): Product[] {
-    switch (sortType) {
-      case 'title':
-        products = this.sortByTitle(products);
-        break;
-
-      default:
-        products = this.sortByTitle(products);
-        break;
+    if (sortType === 'title' || sortType === 'description' || sortType === 'email') {
+      return this.sortByText(products, sortType);
+    } else if (sortType === 'price') {
+      return this.sortByPrice(products);
     }
-    console.log(products);
     return products;
   }
 
-  private sortByTitle(products: Product[]) {
-    return products;
-  }
-
-  private sortByDescription(products: Product[]) {
-    return products;
-  }
-
-  private sortByEmail(products: Product[]) {
-    return products;
+  private sortByText(products: Product[], sortType: string) {
+    return products.sort((a: any, b: any) => {
+      if (a[sortType] < b[sortType]) {
+        return -1;
+      }
+      if (a[sortType] > b[sortType]) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
   private sortByPrice(products: Product[]) {
-    return products;
+    return products.sort((a: any, b: any) => a['price'] - b['price']);
   }
 }
