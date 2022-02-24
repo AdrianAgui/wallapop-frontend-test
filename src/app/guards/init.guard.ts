@@ -6,7 +6,7 @@ import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 
 import { Product } from '../interfaces/product.interface';
-import { ProductsService } from '../services/products.service';
+import { ProductsService } from '../services/products/products.service';
 
 @Injectable({
   providedIn: 'root'

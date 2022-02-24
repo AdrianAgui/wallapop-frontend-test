@@ -5,9 +5,10 @@ import { FooterComponent } from './footer/footer.component';
 import { SearcherComponent } from './searcher/searcher.component';
 import { GridComponent } from './grid/grid.component';
 import { ProductComponent } from './product/product.component';
+import { SortComponent } from './sort/sort.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, SearcherComponent, GridComponent, ProductComponent],
+  declarations: [HeaderComponent, FooterComponent, SearcherComponent, GridComponent, ProductComponent, SortComponent],
   imports: [CommonModule],
   exports: [HeaderComponent, FooterComponent, GridComponent]
 })

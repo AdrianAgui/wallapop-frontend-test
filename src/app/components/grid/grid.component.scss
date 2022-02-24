@@ -1,12 +1,30 @@
+.sort-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 2rem 0 0;
+
+  @media screen and (max-width: 650px) {
+    justify-content: center;
+  }
+}
+
 .grid {
   width: 50%;
   margin: 0 auto;
-
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+
+  justify-content: center;
+  justify-items: center;
   grid-gap: 25px;
 
-  &__product {
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+    width: 75%;
+  }
 
+  @media screen and (max-width: 650px) {
+    grid-template-columns: 1fr;
+    width: 90%;
   }
 }

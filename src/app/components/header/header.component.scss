@@ -9,15 +9,88 @@
   background-color: aquamarine;
 
   .logo {
-    width: 42px;
-    height: 42px;
-    margin: 0.5rem 1rem 0.5rem 2rem;
+    width: 10%;
+    margin: 0.5rem 1rem 0rem 2rem;
     cursor: pointer;
+
+    @media screen and (max-width: 650px) {
+      margin: 0.5rem 0 0 0.5rem;
+    }
+
+    img {
+      width: 42px;
+      height: 42px;
+    }
   }
 
   .searcher {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: center;
+  }
+
+  .favourites {
+    margin-right: 2rem;
+    cursor: pointer;
+
+    @media screen and (max-width: 650px) {
+      margin-right: 0.5rem;
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: inherit;
+      font-weight: 600;
+      position: relative;
+      text-decoration: none;
+      padding: 0.5em 1.25em;
+      border-radius: 6em;
+      transition: all 0.2s;
+      border: none;
+      font-family: inherit;
+      font-weight: 500;
+      color: black;
+      background-color: white;
+      cursor: pointer;
+
+      img {
+        width: 28px;
+        margin-left: 8px;
+      }
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn::after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s;
+    }
+
+    .btn::after {
+      background-color: #fff;
+    }
+
+    .btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
   }
 }

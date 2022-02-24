@@ -1,0 +1,11 @@
+<div class="sort">
+  <div class="select">
+    <select #sort (change)="onChange(sort.value)">
+      <option disabled selected>Ordena por...</option>
+      <option value="title">Título</option>
+      <option value="description">Descripción</option>
+      <option value="email">Email</option>
+      <option value="price">Precio</option>
+    </select>
+  </div>
+</div>

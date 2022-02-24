@@ -16,13 +16,102 @@
     height: 100%;
 
     .top {
+      position: relative;
       height: 70%;
       background: #e4e4e4;
 
-      .image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      .img {
+        &__wrap {
+          width: 100%;
+          height: 100%;
+
+          &:hover .img__description {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+
+        &__image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &__description {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(0, 0, 0, 0.75);
+          color: #fff;
+          padding: 24px;
+          font-size: 14px;
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.5s;
+        }
+      }
+
+      .like-container {
+        $size: 75px;
+        $frames: 62;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        input {
+          display: none;
+        }
+
+        .like {
+          display: block;
+          width: $size;
+          height: $size;
+          cursor: pointer;
+          border-radius: 999px;
+          overflow: visible;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .heart {
+          background-image: url('https://assets.codepen.io/23500/Hashflag-AppleEvent.svg');
+          background-color: rgba(255, 255, 255, 0.4);
+          background-size: calc($size * $frames) $size;
+          background-repeat: no-repeat;
+          background-position-x: calc($size * ($frames * -1 + 2));
+          background-position-y: calc($size * 0.02);
+          width: $size;
+          height: $size;
+          border-radius: 0 0 0 40px;
+        }
+
+        input:checked + .heart {
+          animation: like 1s steps(calc($frames - 3));
+          animation-fill-mode: forwards;
+        }
+
+        @keyframes like {
+          0% {
+            background-position-x: 0;
+          }
+          100% {
+            background-position-x: calc($size * ($frames * -1 + 3));
+          }
+        }
+
+        @media (hover: hover) {
+          .like:hover {
+            background-color: #e1255e15;
+            .heart {
+              background-position-x: calc($size * ($frames * -1 + 1));
+            }
+          }
+        }
       }
     }
 

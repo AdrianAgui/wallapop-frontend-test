@@ -9,4 +9,6 @@ export class HeaderComponent {
   scrollTop() {
     window.scrollTo(0, 0);
   }
+
+  openFavs() {}
 }
