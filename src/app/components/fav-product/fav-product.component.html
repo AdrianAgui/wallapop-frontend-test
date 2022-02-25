@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="top">
+      <div class="img__wrap">
+        <img class="img__image" loading="lazy" [src]="prod?.image" />
+      </div>
+    </div>
+    <div class="bottom">
+      <span class="title">{{ prod?.title }}</span>
+      <button (click)="removeItem()" class="remove">✖</button>
+    </div>
+  </div>
+</div>

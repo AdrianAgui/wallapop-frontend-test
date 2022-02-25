@@ -1,4 +1,5 @@
 export interface Product {
+  id: number;
   description: string;
   email: string;
   image: string;

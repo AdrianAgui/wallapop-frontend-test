@@ -5,9 +5,9 @@
         <img class="img__image" loading="lazy" [src]="product?.image" />
         <div class="img__description">{{ product?.description }}</div>
       </div>
-      <div class="like-container">
+      <div class="like-container" (click)="toggleFav()">
         <label class="like">
-          <input type="checkbox" />
+          <input id="product-{{ product?.id }}" type="checkbox" />
           <div class="heart"></div>
         </label>
       </div>

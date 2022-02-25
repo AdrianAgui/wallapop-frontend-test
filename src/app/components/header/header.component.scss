@@ -39,10 +39,6 @@
 
     .btn {
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
       color: black;
       background-color: white;
       cursor: pointer;
@@ -50,12 +46,13 @@
       text-decoration: none;
       border: none;
       font-family: inherit;
-      font-weight: 600;
+      font-weight: bold;
       padding: 0.5em 1.25em;
       border-radius: 6em;
       transition: all 0.2s;
 
-
+      display: flex;
+      align-items: center;
 
       img {
         width: 28px;
@@ -68,7 +65,7 @@
 
       &__text::after {
         content: 'Favoritos';
-        font-weight: 600;
+        font-weight: bold;
 
         @media screen and (max-width: 650px) {
           content: '';

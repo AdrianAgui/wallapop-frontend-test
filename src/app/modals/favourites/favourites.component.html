@@ -1,1 +1,19 @@
-<p>favourites works!</p>
+<div class="favs-modal">
+  <div class="closebar">
+    <span>Lista de favoritos ({{ products.length }})</span>
+    <button (click)="close()" class="close">✖</button>
+  </div>
+
+  <div class="grid-favs">
+    <div *ngFor="let p of products">
+      <app-fav-product [prod]="p" (remove)="removeFav($event)"></app-fav-product>
+    </div>
+  </div>
+
+  <div *ngIf="products.length === 0" class="empty">
+    <img src="https://es.wallapop.com/assets/images/commons/sad.svg" alt="No hay resultados" />
+    <span>Nada por aquí</span>
+  </div>
+</div>
+
+<div class="backdrop"></div>
