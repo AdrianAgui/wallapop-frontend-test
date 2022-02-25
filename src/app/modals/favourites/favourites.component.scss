@@ -24,6 +24,37 @@
     overflow-y: scroll;
   }
 
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+      margin: 0 0 0 2.5rem;
+    }
+
+    span {
+      font-size: 28px;
+      font-weight: bold;
+      font-family: Caveat, Courgette, Roboto;
+    }
+
+    .close {
+      font-size: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      color: #c0c5cb;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0 0 1rem 1rem;
+
+      @media screen and (max-width: 768px) {
+        font-size: 30px;
+        padding: 1rem;
+      }
+    }
+  }
+
   .grid-favs {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -41,37 +72,6 @@
 
     @media screen and (max-width: 590px) {
       grid-template-columns: 1fr;
-    }
-  }
-
-  .closebar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    @media screen and (max-width: 768px) {
-      margin: 0 0 0 2.5rem;
-    }
-
-    span {
-      font-size: 28px;
-      font-weight: bold;
-      font-family: Caveat, Roboto;
-    }
-
-    .close {
-      font-size: 20px;
-      font-family: 'Courier New', Courier, monospace;
-      color: #c0c5cb;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0 0 1rem 1rem;
-
-      @media screen and (max-width: 768px) {
-        font-size: 30px;
-        padding: 1rem;
-      }
     }
   }
 
