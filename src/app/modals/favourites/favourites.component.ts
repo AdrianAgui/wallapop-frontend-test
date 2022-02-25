@@ -47,9 +47,11 @@ export class FavouritesComponent implements OnInit {
 
   private hiddenBodyOverflow() {
     document.body.classList.add('overflow-hidden');
+    document.body.classList.add('padding-right');
   }
 
   private showBodyOverflow() {
     document.body.classList.remove('overflow-hidden');
+    document.body.classList.remove('padding-right');
   }
 }
