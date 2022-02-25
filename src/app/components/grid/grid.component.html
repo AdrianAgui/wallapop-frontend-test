@@ -1,9 +1,15 @@
-<div class="sort-container">
+<div class="sub-header">
+  <span class="totalProds">{{ products.length }} productos</span>
   <app-sort (sortType)="sortProducts($event)"></app-sort>
 </div>
 
-<div class="grid">
+<div class="grid" infinite-scroll (scrolled)="onScroll()">
   <div *ngFor="let prod of products" class="grid__product">
     <app-product [product]="prod"></app-product>
   </div>
+</div>
+
+<div *ngIf="products.length === 0" class="empty">
+  <img src="https://es.wallapop.com/assets/images/commons/sad.svg" alt="No hay resultados" />
+  <span>Nada por aquí</span>
 </div>

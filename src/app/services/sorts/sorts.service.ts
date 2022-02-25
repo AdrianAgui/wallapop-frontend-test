@@ -16,10 +16,10 @@ export class SortsService {
 
   private sortByText(products: Product[], sortType: string) {
     return products.sort((a: any, b: any) => {
-      if (a[sortType] < b[sortType]) {
+      if (a[sortType].toLowerCase() < b[sortType].toLowerCase()) {
         return -1;
       }
-      if (a[sortType] > b[sortType]) {
+      if (a[sortType].toLowerCase() > b[sortType].toLowerCase()) {
         return 1;
       }
       return 0;
