@@ -10,8 +10,8 @@
   <div class="favourites" >
     <button class="btn" (click)="openFavs()">
       <span class="btn__text"></span>
-      <img *ngIf="activatedFavs" src="assets/images/pixel-red-heart.png" alt="heart" />
-      <img *ngIf="!activatedFavs" src="assets/images/pixel-gray-heart.png" alt="heart" />
+      <img *ngIf="activatedFavs" src="assets/images/pixel-red-heart.png" loading="lazy" alt="heart" />
+      <img *ngIf="!activatedFavs" src="assets/images/pixel-gray-heart.png" loading="lazy" alt="heart" />
     </button>
   </div>
 </header>

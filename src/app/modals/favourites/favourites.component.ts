@@ -10,6 +10,7 @@ import { ProductsService } from '../../services/products/products.service';
 })
 export class FavouritesComponent implements OnInit {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
 
   constructor(private readonly eRef: ElementRef, private readonly router: Router, private readonly productsService: ProductsService) {}
 
@@ -27,11 +28,19 @@ export class FavouritesComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.productsService.getFavProducts();
+    this.filteredProducts = this.products;
     this.hiddenBodyOverflow();
+  }
+
+  filterChange(event: any) {
+    this.filteredProducts = !event.value
+      ? this.products
+      : this.products.filter((prod) => prod.title.toLowerCase().includes(event.value.toLowerCase()));
   }
 
   removeFav(prodToRemove: Product) {
     this.products = this.products.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
+    this.filteredProducts = this.filteredProducts.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
     this.productsService.toggleFav(prodToRemove);
     this.productsService.uncheckGridProduct(prodToRemove);
 

@@ -34,9 +34,10 @@
       height: 20%;
       background-color: rgb(246, 247, 249);
 
-      span {
+      .title {
         margin-left: 16px;
         font-size: 14px;
+        font-weight: bold;
       }
 
       .remove {

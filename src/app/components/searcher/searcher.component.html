@@ -3,12 +3,13 @@
     <img
       src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-magnifier-infographic-elements-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"
       alt="magnifier"
+      loading="lazy"
     />
   </span>
 
   <div class="input-search">
     <label class="input">
-      <input id="filter" class="input__field" type="text" placeholder=" " (input)="filterChange($event.target)" />
+      <input id="filter" class="input__field" type="text" (input)="filterChange($event.target)" />
       <span class="input__label" [ngClass]="{ input__animation: inputHasText }">Buscar...</span>
     </label>
   </div>

@@ -1,9 +1,9 @@
 .favs-modal {
   width: 650px;
-  max-height: 550px;
+  max-height: 650px;
   position: fixed;
   left: 50%;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
   border-radius: 20px;
   padding: 2rem;
@@ -51,6 +51,30 @@
       @media screen and (max-width: 768px) {
         font-size: 30px;
         padding: 1rem;
+      }
+    }
+  }
+
+  .fav-searcher {
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+
+    input {
+      width: 250px;
+      height: 30px;
+      font-family: 'Poppins', Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      border-radius: 20px;
+      padding: 8px 8px;
+      padding-left: 24px;
+      border: 1px solid #9f9f9f;
+      box-shadow: 0 0 5pt 2pt #d3d3d3;
+      
+      &:focus {
+        outline: none;
+        border: 1px solid aquamarine;
+        box-shadow: 0 0 5pt 2pt rgb(0, 182, 121);
       }
     }
   }
