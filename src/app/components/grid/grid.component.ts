@@ -59,12 +59,11 @@ export class GridComponent implements OnInit {
         this.textSearch = this.searcherService.normalize(text);
         const searchResult = this.search();
         this.products = !this.sortType ? searchResult : this.sortsService.sortProducts(searchResult, this.sortType);
-        this.showableTotalProducts = this.products.length;
       } else {
         const result = this.productsService.getAllProducts();
         this.products = !this.sortType ? result : this.sortsService.sortProducts(result, this.sortType);
-        this.showableTotalProducts = this.products.length;
       }
+      this.showableTotalProducts = this.products.length;
     });
   }
 
