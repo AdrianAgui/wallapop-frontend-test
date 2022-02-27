@@ -1,41 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ProductsService } from './products.service';
 import { Product } from '../../interfaces/product.interface';
-import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { first, of } from 'rxjs';
 
-const allProducts = [
-  {
-    id: 2,
-    price: '30',
-    title: 'Barniz'
-  },
-  {
-    id: 3,
-    price: '10',
-    title: 'Cable USB'
-  },
-  {
-    id: 1,
-    price: '20',
-    title: 'Alicates'
-  }
-] as Product[];
-
-const favProducts = [
-  {
-    id: 2,
-    price: '30',
-    title: 'Barniz'
-  },
-  {
-    id: 3,
-    price: '10',
-    title: 'Cable USB'
-  }
-] as Product[];
+import { allProducts, favProducts } from '../../mocks/productsmock';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -49,6 +20,7 @@ describe('ProductsService', () => {
       imports: [HttpClientTestingModule],
       providers: [{ provide: HttpClient, useValue: httpSpy }]
     });
+
     service = TestBed.inject(ProductsService);
 
     service.allProducts = allProducts;
@@ -76,32 +48,37 @@ describe('ProductsService', () => {
 
   describe('when get all products', () => {
     it('should return 3 products', () => {
+      service.allProducts = allProducts;
       expect(service.getAllProducts().length).toEqual(3);
     });
   });
 
   describe('when get fav products', () => {
     it('should return 2 products', () => {
+      service.favProducts = favProducts;
       expect(service.getFavProducts().length).toEqual(2);
     });
   });
 
   describe('when toggle product fav', () => {
-    it('should push favourite', () => {
-      service.favsChange.subscribe((favsLength) => expect(favsLength).toEqual(3));
-      service.toggleFav({
+    it('should push favourite and then remove it', (done) => {
+      const favProdSelected = {
         id: 4,
         price: '50',
-        title: 'Game Boy'
-      } as Product);
-    });
-    it('should remove favourite', () => {
-      service.favsChange.subscribe((favsLength) => expect(favsLength).toEqual(2));
-      service.toggleFav({
-        id: 4,
-        price: '50',
-        title: 'Game Boy'
-      } as Product);
+        title: 'Game Boy',
+        email: 'mail4@mail.com'
+      } as Product;
+
+      service.favsChange.pipe(first()).subscribe((favsLengthPush) => {
+        service.favsChange.pipe(first()).subscribe((favsLengthRemove) => {
+          expect(favsLengthRemove).toEqual(2);
+          done();
+        });
+        expect(favsLengthPush).toEqual(3);
+        service.toggleFav(favProdSelected);
+      });
+
+      service.toggleFav(favProdSelected);
     });
   });
 });

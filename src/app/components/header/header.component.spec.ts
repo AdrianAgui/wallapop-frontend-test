@@ -1,6 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Subject } from 'rxjs';
+import { ProductsService } from '../../services/products/products.service';
 
 import { HeaderComponent } from './header.component';
 
@@ -8,10 +11,20 @@ describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
+  let productsServiceSpy: any;
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+
   beforeEach(async () => {
+    productsServiceSpy = jasmine.createSpyObj('ProductsService', ['']);
+    productsServiceSpy.favsChange = new Subject();
+
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [HeaderComponent]
+      declarations: [HeaderComponent],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+        { provide: ProductsService, useValue: productsServiceSpy }
+      ]
     }).compileComponents();
   });
 
@@ -23,5 +36,20 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('when init component', () => {
+    it('should listen fav changes', () => {
+      component.ngOnInit();
+      productsServiceSpy.favsChange.next(1);
+      expect(component.activatedFavs).toBe(true);
+    });
+  });
+
+  describe('when open modal', () => {
+    it('should navigate to secondary outlet ', () => {
+      component.openFavs();
+      expect(routerSpy.navigate).toHaveBeenCalled();
+    });
   });
 });

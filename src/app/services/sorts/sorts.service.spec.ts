@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Product } from 'src/app/interfaces/product.interface';
+import { Product } from '../../interfaces/product.interface';
 
 import { SortsService } from './sorts.service';
 

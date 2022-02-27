@@ -8,9 +8,8 @@ describe('SearcherComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearcherComponent ]
-    })
-    .compileComponents();
+      declarations: [SearcherComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +20,12 @@ describe('SearcherComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('when search', () => {
+    it('should input search have content', () => {
+      component.filterChange({ value: 'text' });
+      expect(component.inputHasText).toBe(true);
+    });
   });
 });

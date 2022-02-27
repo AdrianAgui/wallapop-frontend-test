@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SearcherService } from 'src/app/services/searcher/searcher.service';
+import { SearcherService } from '../../services/searcher/searcher.service';
 import { Product } from '../../interfaces/product.interface';
 import { ProductsService } from '../../services/products/products.service';
 
@@ -39,6 +39,7 @@ export class FavouritesComponent implements OnInit {
   removeFav(prodToRemove: Product) {
     this.products = this.products.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
     this.filteredProducts = this.filteredProducts.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
+    console.log(this.products);
     this.productsService.toggleFav(prodToRemove);
     this.productsService.uncheckGridProduct(prodToRemove);
 
