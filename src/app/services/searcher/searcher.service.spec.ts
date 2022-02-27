@@ -13,4 +13,11 @@ describe('SearcherService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  describe('when normalize string', () => {
+    it('should remove accents and upper case', () => {
+      const normalizedText = service.normalize('Éstò és Ún téXto sÍn noRMALizAr');
+      expect(normalizedText).toBe('esto es un texto sin normalizar');
+    });
+  });
 });

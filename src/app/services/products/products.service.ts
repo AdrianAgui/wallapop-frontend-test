@@ -9,8 +9,8 @@ const endpoint = 'https://frontend-tech-test-data.s3.eu-west-1.amazonaws.com/ite
   providedIn: 'root'
 })
 export class ProductsService {
-  private allProducts: Product[] = [];
-  private favProducts: Product[] = [];
+  allProducts: Product[] = [];
+  favProducts: Product[] = [];
 
   favsChange: Subject<number> = new Subject<number>();
 
