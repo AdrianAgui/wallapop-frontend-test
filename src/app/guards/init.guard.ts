@@ -5,7 +5,6 @@ import { map, Observable } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 
-import { Product } from '../interfaces/product.interface';
 import { ProductsService } from '../services/products/products.service';
 
 @Injectable({
@@ -16,13 +15,6 @@ export class InitGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     registerLocaleData(es);
-    return this.productsService.getProducts().pipe(
-      map((prods: Product[]) => {
-        if (prods && prods.length > 0) {
-          return true;
-        }
-        return false;
-      })
-    );
+    return this.productsService.getProducts().pipe(map(() => true));
   }
 }

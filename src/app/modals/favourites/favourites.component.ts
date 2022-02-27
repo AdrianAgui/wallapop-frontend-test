@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SearcherService } from 'src/app/services/searcher/searcher.service';
 import { Product } from '../../interfaces/product.interface';
 import { ProductsService } from '../../services/products/products.service';
 
@@ -12,7 +13,12 @@ export class FavouritesComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
 
-  constructor(private readonly eRef: ElementRef, private readonly router: Router, private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly eRef: ElementRef,
+    private readonly router: Router,
+    private readonly productsService: ProductsService,
+    private readonly searcherService: SearcherService
+  ) {}
 
   @HostListener('document:keydown.escape', [])
   onKeydownEsc() {
@@ -35,7 +41,7 @@ export class FavouritesComponent implements OnInit {
   filterChange(event: any) {
     this.filteredProducts = !event.value
       ? this.products
-      : this.products.filter((prod) => prod.title.toLowerCase().includes(event.value.toLowerCase()));
+      : this.products.filter((prod) => this.searcherService.normalize(prod.title).includes(this.searcherService.normalize(event.value)));
   }
 
   removeFav(prodToRemove: Product) {

@@ -11,6 +11,7 @@ import { ProductsService } from '../../services/products/products.service';
 })
 export class GridComponent implements OnInit {
   products: Product[] = [];
+  showableTotalProducts: number | undefined;
 
   private sortType: string | undefined;
   private textSearch = '';
@@ -49,33 +50,36 @@ export class GridComponent implements OnInit {
     this.productsService.getProducts(0, this.limit).subscribe((prods) => {
       this.products = !this.sortType ? prods : this.sortsService.sortProducts(prods, this.sortType);
     });
+    this.showableTotalProducts = this.productsService.getAllProducts().length;
   }
 
   private onSearch() {
-    this.searcherService.onSearchChange.subscribe((text) => {
+    this.searcherService.onSearchChange.subscribe((text: string) => {
       if (text.length >= 2) {
-        this.textSearch = text.toLowerCase();
+        this.textSearch = this.searcherService.normalize(text);
         const searchResult = this.search();
         this.products = !this.sortType ? searchResult : this.sortsService.sortProducts(searchResult, this.sortType);
+        this.showableTotalProducts = this.products.length;
       } else {
-        this.textSearch = '';
-        this.products = this.search().slice(0, this.limit);
+        const result = this.productsService.getAllProducts();
+        this.products = !this.sortType ? result : this.sortsService.sortProducts(result, this.sortType);
+        this.showableTotalProducts = this.products.length;
       }
     });
   }
 
   private search() {
     return this.productsService.getAllProducts().filter((prod: Product) => {
-      const { title, descr, email } = this.productToLowerCase(prod);
+      const { title, descr, email } = this.productNormalize(prod);
       return title.includes(this.textSearch) || descr.includes(this.textSearch) || email.includes(this.textSearch) || prod.price === this.textSearch;
     });
   }
 
-  private productToLowerCase(product: Product) {
+  private productNormalize(product: Product) {
     return {
-      title: product.title.toLowerCase(),
-      descr: product.description.toLowerCase(),
-      email: product.email.toLowerCase()
+      title: this.searcherService.normalize(product.title),
+      descr: this.searcherService.normalize(product.description),
+      email: this.searcherService.normalize(product.email)
     };
   }
 }

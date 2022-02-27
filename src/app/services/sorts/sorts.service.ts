@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
+import { SearcherService } from '../searcher/searcher.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SortsService {
+  constructor(private readonly searcherService: SearcherService) {}
+
   sortProducts(products: Product[], sortType: string): Product[] {
     if (sortType === 'title' || sortType === 'description' || sortType === 'email') {
       return this.sortByText(products, sortType);
@@ -16,10 +19,10 @@ export class SortsService {
 
   private sortByText(products: Product[], sortType: string) {
     return products.sort((a: any, b: any) => {
-      if (a[sortType].toLowerCase() < b[sortType].toLowerCase()) {
+      if (this.searcherService.normalize(a[sortType]) < this.searcherService.normalize(b[sortType])) {
         return -1;
       }
-      if (a[sortType].toLowerCase() > b[sortType].toLowerCase()) {
+      if (this.searcherService.normalize(a[sortType]) > this.searcherService.normalize(b[sortType])) {
         return 1;
       }
       return 0;
