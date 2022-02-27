@@ -1,4 +1,4 @@
-<div class="favs-modal">
+<div #modal class="favs-modal">
   <div class="bar">
     <span>Lista de favoritos ({{ products.length }})</span>
     <button (click)="close()" class="close">✖</button>
@@ -20,4 +20,4 @@
   </div>
 </div>
 
-<div class="backdrop"></div>
+<div class="backdrop" (click)="close()"></div>
