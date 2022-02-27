@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SearcherService } from 'src/app/services/searcher/searcher.service';
 import { Product } from '../../interfaces/product.interface';
@@ -14,7 +14,6 @@ export class FavouritesComponent implements OnInit {
   filteredProducts: Product[] = [];
 
   constructor(
-    private readonly eRef: ElementRef,
     private readonly router: Router,
     private readonly productsService: ProductsService,
     private readonly searcherService: SearcherService
@@ -24,13 +23,6 @@ export class FavouritesComponent implements OnInit {
   onKeydownEsc() {
     this.close();
   }
-
-  // @HostListener('document:click', ['$event'])
-  // clickout(event: any) {
-  //   if (!this.eRef.nativeElement.contains(event.target)) {
-  //     this.close();
-  //   }
-  // }
 
   ngOnInit(): void {
     this.products = this.productsService.getFavProducts();
