@@ -62,6 +62,7 @@ export class GridComponent implements OnInit {
       } else {
         const result = this.productsService.getAllProducts();
         this.products = !this.sortType ? result : this.sortsService.sortProducts(result, this.sortType);
+        this.textSearch = '';
       }
       this.showableTotalProducts = this.products.length;
     });
