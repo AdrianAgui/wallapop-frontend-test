@@ -3,20 +3,22 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { InitGuard } from './guards/init.guard';
 import { MainComponent } from './pages/main/main.component';
-import { FavouritesComponent } from './modals/favourites/favourites.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MainComponent,
-    canActivate: [InitGuard]
-  },
-  {
-    path: 'products',
-    component: FavouritesComponent,
-    outlet: 'fav'
-  },
-  { path: '**', component: MainComponent }
+    // TODO: change canactivate with resolver
+    // resolve: { messages: InboxResolver },
+    canActivate: [InitGuard],
+    children: [
+      {
+        path: 'products',
+        loadChildren: () => import('./modals/modals.module').then((m) => m.ModalsModule),
+        outlet: 'fav'
+      },
+      { path: '**', component: MainComponent }
+    ]
+  }
 ];
 
 @NgModule({

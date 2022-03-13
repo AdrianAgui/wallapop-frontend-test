@@ -21,6 +21,6 @@ export class HeaderComponent implements OnInit {
   }
 
   openFavs() {
-    this.router.navigate([{ outlets: { fav: ['products'] } }]);
+    this.router.navigate([{ outlets: { fav: ['products', 'favs'] } }]);
   }
 }
