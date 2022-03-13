@@ -9,7 +9,7 @@
 
   <div class="input-search">
     <label class="input">
-      <input id="filter" class="input__field" type="text" (input)="filterChange($event.target)" />
+      <input id="filter" class="input__field" type="text" [(ngModel)]="searchValue" (input)="filterChange()" />
       <span class="input__label" [ngClass]="{ input__animation: inputHasText }">Buscar...</span>
     </label>
   </div>

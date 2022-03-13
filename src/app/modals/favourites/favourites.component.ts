@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SearcherService } from '../../services/searcher/searcher.service';
 import { Product } from '../../interfaces/product.interface';
 import { ProductsService } from '../../services/products/products.service';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-favourites',
@@ -25,8 +26,10 @@ export class FavouritesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.productsService.getFavProducts();
-    this.filteredProducts = this.products;
+    this.productsService.favsProducts.subscribe((favs) => {
+      this.products = favs;
+      this.filteredProducts = favs;
+    });
     this.hiddenBodyOverflow();
   }
 
@@ -37,14 +40,7 @@ export class FavouritesComponent implements OnInit {
   }
 
   removeFav(prodToRemove: Product) {
-    this.products = this.products.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
-    this.filteredProducts = this.filteredProducts.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
     this.productsService.toggleFav(prodToRemove);
-    this.productsService.uncheckGridProduct(prodToRemove);
-
-    if (this.products.length === 0) {
-      this.close();
-    }
   }
 
   close() {

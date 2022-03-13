@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, Subject } from 'rxjs';
+import { map, Observable, of, BehaviorSubject, Subject } from 'rxjs';
 import { Product, ProductsResponse } from '../../interfaces/product.interface';
 
 const endpoint = 'https://frontend-tech-test-data.s3.eu-west-1.amazonaws.com/items.json';
@@ -10,11 +10,8 @@ const endpoint = 'https://frontend-tech-test-data.s3.eu-west-1.amazonaws.com/ite
 })
 export class ProductsService {
   allProducts: Product[] = [];
-
-  // TODO: Remove this favprods and send it by favsChange flux obsverable
-  favProducts: Product[] = [];
-
-  favsChange: Subject<number> = new Subject<number>();
+  favsProducts: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
+  reset: Subject<boolean> = new Subject<boolean>();
 
   constructor(private readonly http: HttpClient) {}
 
@@ -34,22 +31,16 @@ export class ProductsService {
     return this.allProducts;
   }
 
-  getFavProducts() {
-    return this.favProducts;
-  }
-
   toggleFav(favProd: Product) {
-    const prodIndex = this.favProducts.findIndex((p) => p.title === favProd.title && p.email === favProd.email);
-    prodIndex >= 0 ? this.favProducts.splice(prodIndex, 1) : this.favProducts.push(favProd);
-    this.favsChange.next(this.favProducts.length);
+    const product = this.findProduct(favProd.id);
+    if (product) {
+      product.checked = !product.checked;
+      this.favsProducts.next(this.allProducts.filter((prod: Product) => prod.checked));
+    }
   }
 
-  // TODO: refactor this (prop checked in product object p.ej.)
-  uncheckGridProduct(prod: Product) {
-    const fav = document.getElementById(`product-${prod.id}`) as HTMLInputElement;
-    if (fav) {
-      fav.checked = false;
-    }
+  private findProduct(id: number) {
+    return this.allProducts.find((prod: Product) => prod.id === id);
   }
 
   private setProductsIds(list: ProductsResponse) {

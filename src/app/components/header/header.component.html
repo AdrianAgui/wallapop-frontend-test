@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="logo" (click)="scrollTop()">
+  <div class="logo" (click)="reset()">
     <img loading="lazy" src="assets/images/logo.svg" />
   </div>
 
@@ -7,7 +7,7 @@
     <app-searcher></app-searcher>
   </div>
 
-  <div class="favourites" >
+  <div class="favourites">
     <button class="btn" (click)="openFavs()">
       <span class="btn__text"></span>
       <img *ngIf="activatedFavs" src="assets/images/pixel-red-heart.png" loading="lazy" alt="heart" />

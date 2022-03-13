@@ -7,7 +7,7 @@
       </div>
       <div class="like-container" (click)="toggleFav()">
         <label class="like">
-          <input id="product-{{ product?.id }}" type="checkbox" (change)="toggleFav()" />
+          <input id="product-{{ product?.id }}" [checked]="product?.checked" type="checkbox" (change)="toggleFav()" />
           <div class="heart"></div>
         </label>
       </div>

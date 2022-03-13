@@ -13,10 +13,11 @@ export class HeaderComponent implements OnInit {
   constructor(private readonly router: Router, private readonly productsService: ProductsService) {}
 
   ngOnInit() {
-    this.productsService.favsChange.subscribe((res) => (this.activatedFavs = res > 0));
+    this.productsService.favsProducts.subscribe((res) => (this.activatedFavs = res.length > 0));
   }
 
-  scrollTop() {
+  reset() {
+    this.productsService.reset.next(true);
     window.scrollTo(0, 0);
   }
 

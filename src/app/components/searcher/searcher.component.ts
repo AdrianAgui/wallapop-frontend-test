@@ -1,3 +1,4 @@
+import { ProductsService } from './../../services/products/products.service';
 import { Component } from '@angular/core';
 import { SearcherService } from '../../services/searcher/searcher.service';
 
@@ -8,12 +9,22 @@ import { SearcherService } from '../../services/searcher/searcher.service';
 })
 export class SearcherComponent {
   inputHasText = false;
+  searchValue = '';
 
-  constructor(private readonly searcherService: SearcherService) {}
+  constructor(private readonly searcherService: SearcherService, private readonly productsService: ProductsService) {}
 
-  filterChange(event: any) {
-    this.inputHasText = event.value !== '';
-    this.searcherService.onSearchChange.next(event.value);
+  ngOnInit() {
+    this.productsService.reset.subscribe((reset) => {
+      if (reset) {
+        this.inputHasText = false;
+        this.searchValue = '';
+      }
+    });
+  }
+
+  filterChange() {
+    this.inputHasText = this.searchValue !== '';
+    this.searcherService.onSearchChange.next(this.searchValue);
   }
 
   focusInput() {

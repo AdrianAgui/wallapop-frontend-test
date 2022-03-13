@@ -26,16 +26,32 @@ export class GridComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts();
     this.onSearch();
+
+    this.productsService.favsProducts.subscribe(() => {
+      if (!this.textSearch) this.getProducts();
+    });
+
+    this.productsService.reset.subscribe((reset) => {
+      if (reset) {
+        this.textSearch = '';
+        this.sortType = '';
+        this.getProducts();
+      }
+    });
   }
 
   sortProducts(sortType: string) {
     this.sortType = sortType;
 
-    if (!this.textSearch) {
-      this.products = this.sortsService.sortProducts(this.productsService.getAllProducts(), sortType).slice(0, this.limit);
+    if (this.sortType) {
+      if (!this.textSearch) {
+        this.products = this.sortsService.sortProducts(this.productsService.getAllProducts(), sortType).slice(0, this.limit);
+      } else {
+        const searchResult = this.search();
+        this.products = this.sortsService.sortProducts(searchResult, sortType);
+      }
     } else {
-      const searchResult = this.search();
-      this.products = this.sortsService.sortProducts(searchResult, sortType);
+      this.getProducts();
     }
   }
 
@@ -49,8 +65,8 @@ export class GridComponent implements OnInit {
   private getProducts() {
     this.productsService.getProducts(0, this.limit).subscribe((prods) => {
       this.products = !this.sortType ? prods : this.sortsService.sortProducts(prods, this.sortType);
+      this.showableTotalProducts = this.productsService.getAllProducts().length;
     });
-    this.showableTotalProducts = this.productsService.getAllProducts().length;
   }
 
   private onSearch() {

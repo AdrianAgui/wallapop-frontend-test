@@ -5,6 +5,7 @@ export interface Product {
   image: string;
   price: string;
   title: string;
+  checked?: boolean;
 }
 
 export interface ProductsResponse {

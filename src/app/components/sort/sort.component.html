@@ -1,7 +1,7 @@
 <div class="sort">
   <div class="select">
-    <select #sort (change)="onChange(sort.value)">
-      <option disabled selected>Ordena por...</option>
+    <select #sort [ngModel]="selectedItem" (change)="onChange(sort.value)">
+      <option value="" disabled selected>Ordena por...</option>
       <option value="title">Título</option>
       <option value="description">Descripción</option>
       <option value="email">Email</option>
