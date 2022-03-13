@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FavouritesComponent } from './favourites/favourites.component';
+import { ModalLayoutComponent } from './modal-layout.component';
 
 const routes: Routes = [
   {
-    path: 'favs',
-    component: FavouritesComponent
+    path: '',
+    component: ModalLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./favourites/favourites.module').then((mod) => mod.FavouritesModule)
+      }
+    ]
   }
 ];
 

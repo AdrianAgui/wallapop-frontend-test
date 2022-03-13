@@ -9,11 +9,10 @@ import { GridComponent } from './grid/grid.component';
 import { ProductComponent } from './product/product.component';
 import { SortComponent } from './sort/sort.component';
 import { RouterModule } from '@angular/router';
-import { FavProductComponent } from './fav-product/fav-product.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, SearcherComponent, GridComponent, ProductComponent, SortComponent, FavProductComponent],
+  declarations: [HeaderComponent, FooterComponent, SearcherComponent, GridComponent, ProductComponent, SortComponent],
   imports: [CommonModule, InfiniteScrollModule, RouterModule],
-  exports: [HeaderComponent, FooterComponent, GridComponent, FavProductComponent]
+  exports: [HeaderComponent, FooterComponent, GridComponent]
 })
 export class ComponentsModule {}

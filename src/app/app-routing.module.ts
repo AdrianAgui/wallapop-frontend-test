@@ -12,11 +12,15 @@ const routes: Routes = [
     canActivate: [InitGuard],
     children: [
       {
-        path: 'products',
-        loadChildren: () => import('./modals/modals.module').then((m) => m.ModalsModule),
-        outlet: 'fav'
+        path: '**',
+        redirectTo: 'home'
       },
-      { path: '**', component: MainComponent }
+      { path: 'home', component: MainComponent },
+      {
+        path: 'products',
+        outlet: 'fav',
+        loadChildren: () => import('./modals/modals.module').then((mod) => mod.ModalsModule)
+      }
     ]
   }
 ];
