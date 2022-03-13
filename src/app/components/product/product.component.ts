@@ -10,18 +10,11 @@ import { ProductsService } from '../../services/products/products.service';
 export class ProductComponent {
   @Input() product: Product | undefined;
 
-  private clicked = false;
-
   constructor(private readonly productsService: ProductsService) {}
 
   toggleFav() {
-    if (this.product && !this.clicked) {
-      this.clicked = true;
+    if (this.product) {
       this.productsService.toggleFav(this.product);
-
-      setTimeout(() => {
-        this.clicked = false;
-      }, 0);
     }
   }
 }

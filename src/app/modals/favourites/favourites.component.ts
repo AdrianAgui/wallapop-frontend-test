@@ -39,7 +39,6 @@ export class FavouritesComponent implements OnInit {
   removeFav(prodToRemove: Product) {
     this.products = this.products.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
     this.filteredProducts = this.filteredProducts.filter((p) => p.title !== prodToRemove.title && p.email !== prodToRemove.email);
-    console.log(this.products);
     this.productsService.toggleFav(prodToRemove);
     this.productsService.uncheckGridProduct(prodToRemove);
 

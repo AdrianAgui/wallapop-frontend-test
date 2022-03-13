@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { InitGuard } from './guards/init.guard';
+import { InitResolver } from './resolvers/init.resolver';
 import { MainComponent } from './pages/main/main.component';
 
 const routes: Routes = [
   {
     path: '',
-    // TODO: change canactivate with resolver
-    // resolve: { messages: InboxResolver },
-    canActivate: [InitGuard],
+    resolve: { products: InitResolver },
     children: [
       {
         path: '**',

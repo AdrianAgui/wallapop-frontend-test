@@ -10,6 +10,8 @@ const endpoint = 'https://frontend-tech-test-data.s3.eu-west-1.amazonaws.com/ite
 })
 export class ProductsService {
   allProducts: Product[] = [];
+
+  // TODO: Remove this favprods and send it by favsChange flux obsverable
   favProducts: Product[] = [];
 
   favsChange: Subject<number> = new Subject<number>();
@@ -42,6 +44,7 @@ export class ProductsService {
     this.favsChange.next(this.favProducts.length);
   }
 
+  // TODO: refactor this (prop checked in product object p.ej.)
   uncheckGridProduct(prod: Product) {
     const fav = document.getElementById(`product-${prod.id}`) as HTMLInputElement;
     if (fav) {
