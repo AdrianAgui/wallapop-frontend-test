@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, Subject } from 'rxjs';
-import { allProducts, products } from '../../mocks/productsmock';
+import { allProducts, products } from '../../mocks/products.mock';
 import { ProductsService } from '../../services/products/products.service';
 import { SearcherService } from '../../services/searcher/searcher.service';
 import { SortsService } from '../../services/sorts/sorts.service';
@@ -24,6 +24,9 @@ describe('GridComponent', () => {
     productsServiceSpy.getProducts.and.returnValue(of(products));
     productsServiceSpy.getAllProducts.and.returnValue(allProducts);
     sortsServiceSpy.sortProducts.and.returnValue(products);
+
+    productsServiceSpy.favsProducts = new Subject();
+    productsServiceSpy.reset = new Subject();
     searcherServiceSpy.onSearchChange = new Subject();
 
     await TestBed.configureTestingModule({
@@ -64,6 +67,7 @@ describe('GridComponent', () => {
     });
 
     it('should get results if text has equal or more than 2 chars', () => {
+      component.ngOnInit();
       searcherServiceSpy.onSearchChange.next('a');
       expect(component.showableTotalProducts).toEqual(3);
       expect(component.products.length).toEqual(3);

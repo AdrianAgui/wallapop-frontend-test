@@ -74,6 +74,7 @@ export class GridComponent implements OnInit {
       if (text.length >= 2) {
         this.textSearch = this.searcherService.normalize(text);
         const searchResult = this.search();
+        console.log(searchResult);
         this.products = !this.sortType ? searchResult : this.sortsService.sortProducts(searchResult, this.sortType);
       } else {
         const result = this.productsService.getAllProducts();

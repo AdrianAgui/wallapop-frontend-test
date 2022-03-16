@@ -16,7 +16,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     productsServiceSpy = jasmine.createSpyObj('ProductsService', ['']);
-    productsServiceSpy.favsChange = new Subject();
+    productsServiceSpy.favsProducts = new Subject();
+    productsServiceSpy.reset = new Subject();
 
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
@@ -41,8 +42,8 @@ describe('HeaderComponent', () => {
   describe('when init component', () => {
     it('should listen fav changes', () => {
       component.ngOnInit();
-      productsServiceSpy.favsChange.next(1);
-      expect(component.activatedFavs).toBe(true);
+      productsServiceSpy.favsProducts.next([]);
+      expect(component.activatedFavs).toBe(false);
     });
   });
 

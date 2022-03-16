@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { SearcherService } from '../../services/searcher/searcher.service';
 import { Product } from '../../interfaces/product.interface';
 import { ProductsService } from '../../services/products/products.service';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-favourites',
